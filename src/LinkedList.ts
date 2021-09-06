@@ -1,78 +1,79 @@
+import { Sorter } from "./Sorter";
+
 class Nodee {
-    next:Nodee | null = null;
-    constructor(public data: number,){}
+  next: Nodee | null = null;
+  constructor(public data: number) {}
 }
 
-export class LinkedList {
-    head:Nodee | null = null;
-    
-    add(data:number): void {
-        const node = new Nodee(data);
-        if(!this.head){
-            this.head = node;
-            return;
-        }
+export class LinkedList extends Sorter {
+  head: Nodee | null = null;
 
-        let tail = this.head;
-        while(tail.next) {
-            tail = tail.next;
-        }
-        tail.next = node;
-    }
-    get length(): number {
-        if(!this.head) {
-            return 0;
-        }
-        let length = 1;
-        let node = this.head;
-        while(node.next) {
-            length++;
-            node = node.next;
-        }
-        return length;
+  add(data: number): void {
+    const node = new Nodee(data);
+    if (!this.head) {
+      this.head = node;
+      return;
     }
 
-    at(index: number): Nodee {
-        if(!this.head) {
-            throw new Error("Index out of bounds");
-        }
-        let counter = 0;
-        let node: Nodee | null = this.head;
+    let tail = this.head;
+    while (tail.next) {
+      tail = tail.next;
+    }
+    tail.next = node;
+  }
+  get length(): number {
+    if (!this.head) {
+      return 0;
+    }
+    let length = 1;
+    let node = this.head;
+    while (node.next) {
+      length++;
+      node = node.next;
+    }
+    return length;
+  }
 
-        while(node) {
-            if(counter === index) {
-                return node;
-            }
-            counter++;
-            node = node.next;
-        }
+  at(index: number): Nodee {
+    if (!this.head) {
+      throw new Error("Index out of bounds");
+    }
+    let counter = 0;
+    let node: Nodee | null = this.head;
 
-        throw new Error("Index out of bounds");
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+      counter++;
+      node = node.next;
     }
 
-    compare(leftIndex: number, rightIndex: number): boolean {
-        if(!this.head) {
-            throw new Error("Linkedlist is empty");
-        }
-        return this.at(leftIndex).data > this.at(rightIndex).data;
-    }
+    throw new Error("Index out of bounds");
+  }
 
-    swap(leftIndex: number, rightIndex: number): void {
-        const leftNode = this.at(leftIndex);
-        const rightNode = this.at(rightIndex);
-        const leftHand = leftNode.data;
-        leftNode.data = rightNode.data;
-        rightNode.data  = leftHand;
+  compare(leftIndex: number, rightIndex: number): boolean {
+    if (!this.head) {
+      throw new Error("Linkedlist is empty");
+    }
+    return this.at(leftIndex).data > this.at(rightIndex).data;
+  }
 
+  swap(leftIndex: number, rightIndex: number): void {
+    const leftNode = this.at(leftIndex);
+    const rightNode = this.at(rightIndex);
+    const leftHand = leftNode.data;
+    leftNode.data = rightNode.data;
+    rightNode.data = leftHand;
+  }
+  print(): void {
+    if (!this.head) {
+      return;
     }
-    print(): void {
-        if(!this.head) {
-            return;
-        }
-        let node: Nodee | null = this.head;
-        while(node) {
-            console.log(node.data);
-            node = node.next;
-        }
+    let node: Nodee | null = this.head;
+    while (node) {
+      console.log(node.data);
+      node = node.next;
     }
+  }
 }

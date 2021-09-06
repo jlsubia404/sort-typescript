@@ -1,20 +1,20 @@
-export class NumbersCollection {
-    data: number[];
-    
-    constructor(data: number[]){
-        this.data = data;
-    }
+import { Sorter } from "./Sorter";
+export class NumbersCollection extends Sorter {
+  constructor(public data: number[]) {
+    super();
+    this.data = data;
+  }
 
-    get length(): number { 
-        return this.data.length;
-    }
+  get length(): number {
+    return this.data.length;
+  }
 
-    compare(leftIdx: number, rightIdx: number):boolean {
-        return this.data[leftIdx] > this.data[rightIdx];
-    }
-    swap(leftIdx: number, rightIdx: number): void {
-        const leftHand = this.data[leftIdx];
-        this.data[leftIdx] = this.data[rightIdx];
-        this.data[rightIdx] = leftHand;
-    }
+  compare(leftIdx: number, rightIdx: number): boolean {
+    return this.data[leftIdx] > this.data[rightIdx];
+  }
+  swap(leftIdx: number, rightIdx: number): void {
+    const leftHand = this.data[leftIdx];
+    this.data[leftIdx] = this.data[rightIdx];
+    this.data[rightIdx] = leftHand;
+  }
 }
